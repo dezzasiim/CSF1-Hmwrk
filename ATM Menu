@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSF1Homework
+{
+    class ATMapplication
+    {
+        static void Main()
+        {
+            int attempt = 0;
+            int attemptP = 0;
+            bool exit = false;
+            string thePassword = "booligan";
+            string theUserName = "101110";
+            do
+            {
+
+                Console.WriteLine("Please enter username");
+                string userName = Console.ReadLine().ToLower();
+
+                switch (userName)
+                {
+                    case "101110":
+                        do
+                        {
+                            Console.WriteLine("Enter Password");
+                            string userPassword = Console.ReadLine().ToLower();
+
+                            switch (userPassword)
+                            {
+                                case "booligan"://here im just gonna copy in that menu from class
+
+                                    decimal balance = 487.85m;
+                                    bool repeat = true;
+                                    //
+                                    //do -> tab->tab
+                                    do
+                                    {
+                                        //do while always runs once. this can be good when using menus
+                                        Console.Title = "Balance: $" + balance;
+                                        Console.WriteLine(" C)heck Balance \n M)ake a deposit \n W)ithdrawal\n E)xit");
+                                        ConsoleKey userChoice = Console.ReadKey(true).Key;
+                                        Console.Clear();
+
+                                        switch (userChoice)
+                                        {
+                                            case ConsoleKey.C:
+                                                Console.WriteLine($"Your balance is {balance:c}");
+                                                break;
+                                            case ConsoleKey.M:
+                                                Console.WriteLine("How much would you like to deposit?");
+                                                decimal deposit = decimal.Parse(Console.ReadLine());
+                                                balance += deposit;
+                                                Console.WriteLine($"{deposit} has been deposited");
+
+                                                break;
+                                            case ConsoleKey.W:
+                                                Console.WriteLine("How much would you like to withdraw?");
+                                                decimal withdraw = decimal.Parse(Console.ReadLine());
+                                                balance -= withdraw;
+                                                Console.WriteLine($"{withdraw} has been taken out");
+                                                break;
+                                            case ConsoleKey.E:
+                                                Console.WriteLine("Thank you for using the app. A 5$ dollar exit fee has been applied");
+                                                repeat = false;
+                                                exit = true;
+                                                break;
+                                            default:
+                                                Console.WriteLine("That wasnt an option. 5$ has been take out your account. Try again.");
+                                                balance -= 5;
+                                                break;
+                                        }
+                                    } while (repeat);
+
+                                    // end big copy pasta
+                                    break;
+                                default:
+                                    Console.WriteLine("wrong password");
+                                    attemptP++;
+                                    break;
+
+                            }
+                            if (attemptP == 3)
+                            {
+                                Console.WriteLine("Attempts exceeded");
+                                exit = true;
+                            }
+                        } while (!exit && attemptP < 4);
+
+                        break;
+                    default:
+                        Console.WriteLine("Please try again");
+                        attempt++;
+                        break;
+                }
+
+            } while (!exit && attempt < 3);
+        }
+    }
+}
